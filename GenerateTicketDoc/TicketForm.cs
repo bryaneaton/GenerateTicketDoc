@@ -36,7 +36,7 @@ namespace GenerateTicketDoc
                 txtApplicationName.DataBindings.Add(applicationNameBind);
                 txtDescription.DataBindings.Add(descriptionBind);
                 txtEMail.DataBindings.Add(emailBind);
-                txtPhoneNumber.DataBindings.Add(phoneNumberBind);
+                //txtPhoneNumber.DataBindings.Add(phoneNumberBind);
                 txtRollBack1.DataBindings.Add(rollback1Bind);
                 txtRollBack2.DataBindings.Add(rollback2Bind);
                 txtSystemAffected1.DataBindings.Add(systemAffected1Bind);

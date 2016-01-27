@@ -1,5 +1,6 @@
 ﻿using Novacode;
 using System;
+using System.Data.SqlClient;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -12,10 +13,15 @@ namespace GenerateTicketDoc
 
         }
 
+        private string getUserName()
+        {
+            string e = Environment.UserName;
+            return e;
+        }
         internal void createRollBackDoc(string ticketNumber, string date, string system1, string system2, string rollBackSSRS, string rollbackSQL)
         {
             //todo: Open Template Document
-            string fileName = @"\\ctg-filesvr\mis\Bryan\Tickets\Test\RollbackPlan_" + ticketNumber + ".docx";
+            string fileName = @"\\ctg-filesvr\cvenusers$\" + getUserName() + @"\Desktop\RollbackPlan_" + ticketNumber + ".docx";
 
 
 
@@ -46,7 +52,7 @@ namespace GenerateTicketDoc
                     {
                         File.Delete(fileName);
                         document.SaveAs(fileName);
-                        //todo: save as here
+
                     }
                     catch (Exception e)
                     {
@@ -67,7 +73,7 @@ namespace GenerateTicketDoc
         internal void createRollBackDoc(string ticketNumber, string date, string system1, string system2, string rollBackSSRS, string rollbackSQL, string rollback3)
         {
             //todo: Open Template Document
-            string fileName = @"\\ctg-filesvr\mis\Bryan\Tickets\Test\RollbackPlan_" + ticketNumber + ".docx";
+            string fileName = @"\\ctg-filesvr\cvenusers$\" + getUserName() + @"\Desktop\RollbackPlan_" + ticketNumber + ".docx";
 
 
 
@@ -118,7 +124,7 @@ namespace GenerateTicketDoc
         internal void createTestingDoc(string ticketNumber, string date, string analystName, string applicationName, string description, string name, string firstName)
         {
             //todo: Open Template Document
-            string fileName = @"\\ctg-filesvr\mis\Bryan\Tickets\Test\TestPlan_" + ticketNumber + ".docx";
+            string fileName = @"\\ctg-filesvr\cvenusers$\" + getUserName() + @"\Desktop\TestPlan_" + ticketNumber + ".docx";
 
 
 
@@ -163,7 +169,7 @@ namespace GenerateTicketDoc
         internal void createChangeDoc(string date, string ticketNumber, string department, string name, string phoneNumber, string eMail, string systemAffected1, string systemAffected2, string description)
         {
             //todo: Open Template Document
-            string fileName = @"\\ctg-filesvr\mis\Bryan\Tickets\Test\ChangeRequirements_" + ticketNumber + ".docx";
+            string fileName = @"\\ctg-filesvr\cvenusers$\" + getUserName() + @"\Desktop\ChangeRequirements_" + ticketNumber + ".docx";
 
 
 

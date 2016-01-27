@@ -32,7 +32,6 @@
             this.txtTicketNumber = new GenerateTicketDoc.WaterMarkTextBox();
             this.txtFirstName = new GenerateTicketDoc.WaterMarkTextBox();
             this.txtLastName = new GenerateTicketDoc.WaterMarkTextBox();
-            this.txtPhoneNumber = new GenerateTicketDoc.WaterMarkTextBox();
             this.txtDepartment = new GenerateTicketDoc.WaterMarkTextBox();
             this.txtEMail = new GenerateTicketDoc.WaterMarkTextBox();
             this.txtAnalystName = new GenerateTicketDoc.WaterMarkTextBox();
@@ -85,20 +84,10 @@
             this.txtLastName.WaterMarkColor = System.Drawing.Color.Gray;
             this.txtLastName.WaterMarkText = "Last Name";
             // 
-            // txtPhoneNumber
-            // 
-            this.txtPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtPhoneNumber.Location = new System.Drawing.Point(13, 91);
-            this.txtPhoneNumber.Name = "txtPhoneNumber";
-            this.txtPhoneNumber.Size = new System.Drawing.Size(100, 20);
-            this.txtPhoneNumber.TabIndex = 19;
-            this.txtPhoneNumber.WaterMarkColor = System.Drawing.Color.Gray;
-            this.txtPhoneNumber.WaterMarkText = "Enter Phone Number";
-            // 
             // txtDepartment
             // 
             this.txtDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtDepartment.Location = new System.Drawing.Point(13, 117);
+            this.txtDepartment.Location = new System.Drawing.Point(14, 91);
             this.txtDepartment.Name = "txtDepartment";
             this.txtDepartment.Size = new System.Drawing.Size(100, 20);
             this.txtDepartment.TabIndex = 20;
@@ -108,7 +97,7 @@
             // txtEMail
             // 
             this.txtEMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtEMail.Location = new System.Drawing.Point(12, 143);
+            this.txtEMail.Location = new System.Drawing.Point(13, 117);
             this.txtEMail.Name = "txtEMail";
             this.txtEMail.Size = new System.Drawing.Size(100, 20);
             this.txtEMail.TabIndex = 21;
@@ -158,7 +147,7 @@
             // txtSystemAffected1
             // 
             this.txtSystemAffected1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtSystemAffected1.Location = new System.Drawing.Point(12, 169);
+            this.txtSystemAffected1.Location = new System.Drawing.Point(13, 143);
             this.txtSystemAffected1.Name = "txtSystemAffected1";
             this.txtSystemAffected1.Size = new System.Drawing.Size(100, 20);
             this.txtSystemAffected1.TabIndex = 25;
@@ -174,7 +163,6 @@
             this.txtSystemAffected2.TabIndex = 25;
             this.txtSystemAffected2.WaterMarkColor = System.Drawing.Color.Gray;
             this.txtSystemAffected2.WaterMarkText = "System Affected 2";
-
             // 
             // txtTestingDescription
             // 
@@ -190,7 +178,7 @@
             // 
             this.txtDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.txtDescription.Location = new System.Drawing.Point(172, 39);
-            this.txtDescription.Name = "waterMarkTextBox1";
+            this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(100, 20);
             this.txtDescription.TabIndex = 30;
             this.txtDescription.WaterMarkColor = System.Drawing.Color.Gray;
@@ -211,7 +199,6 @@
             this.Controls.Add(this.txtSystemAffected2);
             this.Controls.Add(this.txtEMail);
             this.Controls.Add(this.txtDepartment);
-            this.Controls.Add(this.txtPhoneNumber);
             this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.txtTicketNumber);
@@ -228,7 +215,7 @@
         private WaterMarkTextBox txtTicketNumber;
         private WaterMarkTextBox txtFirstName;
         private WaterMarkTextBox txtLastName;
-        private WaterMarkTextBox txtPhoneNumber;
+        //private WaterMarkTextBox txtPhoneNumber;
         private WaterMarkTextBox txtDepartment;
         private WaterMarkTextBox txtEMail;
         private WaterMarkTextBox txtDescription;

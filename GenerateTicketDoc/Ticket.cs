@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data.SqlClient;
 
 namespace GenerateTicketDoc
 {
@@ -43,23 +44,6 @@ namespace GenerateTicketDoc
             get
             {
                 return firstName + " " + lastName;
-            }
-        }
-
-        private string _phoneNumber;
-        public string phoneNumber
-        {
-            set
-            {
-                if (_phoneNumber != value)
-                {
-                    _phoneNumber = value;
-                    InvokePropertyChanged(new PropertyChangedEventArgs("phoneNumber"));
-                }
-            }
-            get
-            {
-                return _phoneNumber;
             }
         }
 
@@ -120,7 +104,15 @@ namespace GenerateTicketDoc
             }
             get
             {
-                return _systemAffected1;
+                if (String.IsNullOrEmpty(_systemAffected1))
+                {
+                    return "N/A";
+                }
+                else
+                {
+                    return _systemAffected1;
+                }
+                
             }
         }
         private string _systemAffected2;
@@ -136,7 +128,14 @@ namespace GenerateTicketDoc
             }
             get
             {
-                return _systemAffected2;
+                if (String.IsNullOrEmpty(_systemAffected2))
+                {
+                    return "N/A";
+                }
+                else
+                {
+                    return _systemAffected2;
+                }
             }
         }
 
@@ -258,14 +257,68 @@ namespace GenerateTicketDoc
             }
         }
 
+        private string _phoneNumber;
+        public string phoneNumber
+        {
+            set
+            {
+                if (String.IsNullOrEmpty(_phoneNumber))
+                {
+                    _phoneNumber = getPhoneNumber(_firstName, _lastName);
+                }
+            }
+            get
+            {
+                if (String.IsNullOrEmpty(_phoneNumber))
+                {
+                    return getPhoneNumber(_firstName, _lastName);
+                }
+                else
+                {
+                    return _phoneNumber;
+                }
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void InvokePropertyChanged(PropertyChangedEventArgs e)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
+                PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, e);
         }
 
+        private string getPhoneNumber(string firstName, string lastName)
+        {
+            using (SqlConnection conn = new SqlConnection("Data Source=CTG-SQLLAB01;Integrated Security=true"))
+            {
+                string sql = @"SELECT officePhone from ITQ.dbo.adusers where givenname= @firstName AND surname = @lastName";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("firstName", firstName);
+                cmd.Parameters.AddWithValue("lastName", lastName);
+                try
+                {
+                    conn.Open();
+                    string result;
+                    var phoneNumber = cmd.ExecuteScalar();
+
+                    if (phoneNumber != null)
+                    {
+                        result = phoneNumber.ToString();
+                    }
+                    else
+                    {
+                        result = "4238675309";
+                    }
+                    return result;
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }
