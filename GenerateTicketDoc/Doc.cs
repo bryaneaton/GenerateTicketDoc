@@ -20,12 +20,11 @@ namespace GenerateTicketDoc
         }
         internal void createRollBackDoc(string ticketNumber, string date, string system1, string system2, string rollBackSSRS, string rollbackSQL)
         {
-            //todo: Open Template Document
             string fileName = @"\\ctg-filesvr\cvenusers$\" + getUserName() + @"\Desktop\RollbackPlan_" + ticketNumber + ".docx";
 
 
 
-            using (DocX document = DocX.Load(@"\\ctg-filesvr\mis\Bryan\Tickets\Template\Rollback Plan_XXXXX.docx"))
+            using (DocX document = DocX.Load(@"\\ctg-filesvr\mis\Bryan\Template\Rollback Plan_XXXXX.docx"))
             {
                 //Replace Ticket #
                 document.ReplaceText("templateNumber", ticketNumber, false, RegexOptions.IgnoreCase);
@@ -77,7 +76,7 @@ namespace GenerateTicketDoc
 
 
 
-            using (DocX document = DocX.Load(@"\\ctg-filesvr\mis\Bryan\Tickets\Template\Rollback Plan_XXXXX.docx"))
+            using (DocX document = DocX.Load(@"\\ctg-filesvr\mis\Bryan\Template\Rollback Plan_XXXXX.docx"))
             {
                 //Replace Ticket #
                 document.ReplaceText("templateNumber", ticketNumber, false, RegexOptions.IgnoreCase);
@@ -121,14 +120,14 @@ namespace GenerateTicketDoc
 
 
         }
-        internal void createTestingDoc(string ticketNumber, string date, string analystName, string applicationName, string description, string name, string firstName)
+        internal void createTestingDoc(string ticketNumber, string date, string analystName, string applicationName, string description, string name, string firstName, string phoneNumber)
         {
             //todo: Open Template Document
             string fileName = @"\\ctg-filesvr\cvenusers$\" + getUserName() + @"\Desktop\TestPlan_" + ticketNumber + ".docx";
 
 
 
-            using (DocX document = DocX.Load(@"\\ctg-filesvr\mis\Bryan\Tickets\Template\Test Plan_XXXXX.docx"))
+            using (DocX document = DocX.Load(@"\\ctg-filesvr\mis\Bryan\Template\Test Plan_XXXXX.docx"))
             {
                 //Replace Ticket #
                 document.ReplaceText("templateNumber", ticketNumber, false, RegexOptions.IgnoreCase);
@@ -143,7 +142,7 @@ namespace GenerateTicketDoc
                 document.ReplaceText("templateAnalystName", analystName, false, RegexOptions.IgnoreCase);
                 document.ReplaceText("templateName", name, false, RegexOptions.IgnoreCase);
                 document.ReplaceText("templateFirstName", firstName, false, RegexOptions.IgnoreCase);
-
+                document.ReplaceText("templatePhoneNumber", phoneNumber, false, RegexOptions.IgnoreCase);
 
                 // Save to the output directory:
                 if (File.Exists(fileName))
@@ -173,7 +172,7 @@ namespace GenerateTicketDoc
 
 
 
-            using (DocX document = DocX.Load(@"\\ctg-filesvr\mis\Bryan\Tickets\Template\Change Requirements_XXXX.docx"))
+            using (DocX document = DocX.Load(@"\\ctg-filesvr\mis\Bryan\Template\Change Requirements_XXXX.docx"))
             {
                 //Replace Ticket #
                 document.ReplaceText("templateNumber", ticketNumber, false, RegexOptions.IgnoreCase);
@@ -213,5 +212,6 @@ namespace GenerateTicketDoc
 
             }
         }
+
     }
 }

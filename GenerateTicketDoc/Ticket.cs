@@ -52,15 +52,21 @@ namespace GenerateTicketDoc
         {
             set
             {
-                if (_email != value)
+                if (String.IsNullOrEmpty(_phoneNumber))
                 {
-                    _email = value;
-                    InvokePropertyChanged(new PropertyChangedEventArgs("eMail"));
+                    _email = getEmail(_firstName, _lastName);
                 }
             }
             get
             {
-                return _email;
+                if (String.IsNullOrEmpty(_phoneNumber))
+                {
+                    return getEmail(_firstName, _lastName);
+                }
+                else
+                {
+                    return _email;
+                }
             }
         }
 
@@ -104,15 +110,7 @@ namespace GenerateTicketDoc
             }
             get
             {
-                if (String.IsNullOrEmpty(_systemAffected1))
-                {
-                    return "N/A";
-                }
-                else
-                {
-                    return _systemAffected1;
-                }
-                
+                return _systemAffected1;
             }
         }
         private string _systemAffected2;
@@ -128,14 +126,7 @@ namespace GenerateTicketDoc
             }
             get
             {
-                if (String.IsNullOrEmpty(_systemAffected2))
-                {
-                    return "N/A";
-                }
-                else
-                {
-                    return _systemAffected2;
-                }
+                return _systemAffected2;
             }
         }
 
@@ -310,6 +301,38 @@ namespace GenerateTicketDoc
                     else
                     {
                         result = "4238675309";
+                    }
+                    return result;
+
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        private string getEmail(string firstName, string lastName)
+        {
+            using (SqlConnection conn = new SqlConnection("Data Source=CTG-SQLLAB01;Integrated Security=true"))
+            {
+                string sql = @"SELECT CASE WHEN company IN('CTG', 'CVEN') THEN samaccountname + '@covenanttransport.com' WHEN company = 'SRFI' THEN samaccountname + '@southernref.com' ELSE 'Unknown' END 'Email' from ITQ.dbo.adusers where givenname= @firstName AND surname = @lastName";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("firstName", firstName);
+                cmd.Parameters.AddWithValue("lastName", lastName);
+                try
+                {
+                    conn.Open();
+                    string result;
+                    var email = cmd.ExecuteScalar();
+
+                    if (email != null)
+                    {
+                        result = email.ToString();
+                    }
+                    else
+                    {
+                        result = "Unknown";
                     }
                     return result;
 

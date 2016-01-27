@@ -17,7 +17,7 @@ namespace GenerateTicketDoc
                 Binding lastNameBind = new Binding("Text", t, "lastName", true, DataSourceUpdateMode.OnValidation);
                 Binding phoneNumberBind = new Binding("Text", t, "phoneNumber", true, DataSourceUpdateMode.OnValidation);
                 Binding departmentBind = new Binding("Text", t, "department", true, DataSourceUpdateMode.OnValidation);
-                Binding emailBind = new Binding("Text", t, "eMail", true, DataSourceUpdateMode.OnValidation);
+                //Binding emailBind = new Binding("Text", t, "eMail", true, DataSourceUpdateMode.OnValidation);
                 Binding descriptionBind = new Binding("Text", t, "description", true, DataSourceUpdateMode.OnValidation);
                 Binding analystNameBind = new Binding("Text", t, "analystName", true, DataSourceUpdateMode.OnValidation);
                 Binding applicationNameBind = new Binding("Text", t, "applicationName", true, DataSourceUpdateMode.OnValidation);
@@ -35,7 +35,7 @@ namespace GenerateTicketDoc
                 txtAnalystName.DataBindings.Add(analystNameBind);
                 txtApplicationName.DataBindings.Add(applicationNameBind);
                 txtDescription.DataBindings.Add(descriptionBind);
-                txtEMail.DataBindings.Add(emailBind);
+                //txtEMail.DataBindings.Add(emailBind);
                 //txtPhoneNumber.DataBindings.Add(phoneNumberBind);
                 txtRollBack1.DataBindings.Add(rollback1Bind);
                 txtRollBack2.DataBindings.Add(rollback2Bind);
@@ -75,12 +75,21 @@ namespace GenerateTicketDoc
 
             try
             {
+                bool isNull = checkNulls();
 
-                var d = new Doc();
-                d.createRollBackDoc(t.ticketNumber, t.date, t.systemAffected1, t.systemAffected2, t.rollBack1, t.rollBack2);
-                d.createTestingDoc(t.ticketNumber, t.date, t.analystName, t.applicationName, t.description, t.name, t.firstName);
-                d.createChangeDoc(t.date, t.ticketNumber, t.department, t.name, t.phoneNumber, t.eMail, t.systemAffected1, t.systemAffected2, t.description);
-                MessageBox.Show("Files Created");
+                if (isNull == false)
+                {
+                    var d = new Doc();
+                    d.createRollBackDoc(t.ticketNumber, t.date, t.systemAffected1, t.systemAffected2, t.rollBack1, t.rollBack2);
+                    d.createTestingDoc(t.ticketNumber, t.date, t.analystName, t.applicationName, t.description, t.name, t.firstName, t.phoneNumber);
+                    d.createChangeDoc(t.date, t.ticketNumber, t.department, t.name, t.phoneNumber, t.eMail, t.systemAffected1, t.systemAffected2, t.description);
+                    MessageBox.Show("Files Created");
+                }
+                else
+                {
+                    MessageBox.Show("Don't Leave Empty Boxes!");
+                }
+                
 
             }
             catch (Exception ex)
@@ -88,6 +97,28 @@ namespace GenerateTicketDoc
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private bool checkNulls()
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(t.systemAffected1) || String.IsNullOrEmpty(t.systemAffected2) || String.IsNullOrEmpty(t.rollBack1) || String.IsNullOrEmpty(t.rollBack2) ||
+                    String.IsNullOrEmpty(t.ticketNumber) || String.IsNullOrEmpty(t.analystName) || String.IsNullOrEmpty(t.applicationName) || String.IsNullOrEmpty(t.description) ||
+                    String.IsNullOrEmpty(t.firstName) || String.IsNullOrEmpty(t.lastName) || String.IsNullOrEmpty(t.department) || String.IsNullOrEmpty(t.testingDescription))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
