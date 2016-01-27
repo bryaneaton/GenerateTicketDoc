@@ -18,9 +18,12 @@ namespace GenerateTicketDoc
             string e = Environment.UserName;
             return e;
         }
+
+        internal string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         internal void createRollBackDoc(string ticketNumber, string date, string system1, string system2, string rollBackSSRS, string rollbackSQL)
         {
-            string fileName = @"\\ctg-filesvr\cvenusers$\" + getUserName() + @"\Desktop\RollbackPlan_" + ticketNumber + ".docx";
+
+            string fileName = desktop + @"\RollbackPlan_" + ticketNumber + ".docx";
 
 
 
@@ -72,7 +75,7 @@ namespace GenerateTicketDoc
         internal void createRollBackDoc(string ticketNumber, string date, string system1, string system2, string rollBackSSRS, string rollbackSQL, string rollback3)
         {
             //todo: Open Template Document
-            string fileName = @"\\ctg-filesvr\cvenusers$\" + getUserName() + @"\Desktop\RollbackPlan_" + ticketNumber + ".docx";
+            string fileName = desktop + @"\\RollbackPlan_" + ticketNumber + ".docx";
 
 
 
@@ -123,7 +126,7 @@ namespace GenerateTicketDoc
         internal void createTestingDoc(string ticketNumber, string date, string analystName, string applicationName, string description, string name, string firstName, string phoneNumber)
         {
             //todo: Open Template Document
-            string fileName = @"\\ctg-filesvr\cvenusers$\" + getUserName() + @"\Desktop\TestPlan_" + ticketNumber + ".docx";
+            string fileName = desktop + @"\TestPlan_" + ticketNumber + ".docx";
 
 
 

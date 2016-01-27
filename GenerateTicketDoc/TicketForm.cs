@@ -83,7 +83,8 @@ namespace GenerateTicketDoc
                     d.createRollBackDoc(t.ticketNumber, t.date, t.systemAffected1, t.systemAffected2, t.rollBack1, t.rollBack2);
                     d.createTestingDoc(t.ticketNumber, t.date, t.analystName, t.applicationName, t.description, t.name, t.firstName, t.phoneNumber);
                     d.createChangeDoc(t.date, t.ticketNumber, t.department, t.name, t.phoneNumber, t.eMail, t.systemAffected1, t.systemAffected2, t.description);
-                    MessageBox.Show("Files Created");
+                    MessageBox.Show("Files Created on your Desktop \n \n (" + Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) +")");
+                    this.Close();
                 }
                 else
                 {
